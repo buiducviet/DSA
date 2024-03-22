@@ -6,7 +6,7 @@ int h[MaxN];
 int R[MaxN], L[MaxN];
 vector<int> V;
 int m, n;
-
+// scan input and add into array
 void input(){
     cin >> n >> m;
     for(int i = 1; i <= n; i++){
@@ -17,8 +17,10 @@ void input(){
     
 
 }
+// calculate() funtion to compute max square
 int calculate(){
     int res=0;
+    // set virtual edge with 
     h[0] = -1;
     h[m+1] = -1;
     for(int i = 1; i <= m+1; i++){
