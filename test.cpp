@@ -11,6 +11,7 @@ int load[MAXN];
 int y[MAXN];
 int f, f_min;
 int segments, nbR;
+//input 
 void input(){
     cin >> n >> K >> Q;
     for(int i = 1; i <=n; i++){
