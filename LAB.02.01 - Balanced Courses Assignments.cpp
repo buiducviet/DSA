@@ -8,9 +8,8 @@ int conflict_count ;
 vector<vector<int>> teacher_list(32); // list teacher of each course;
 int conflict[MaxN][MaxN];
 int X[MaxN];
-int maxLoad;
-int cnt;
-int currentLoad[MaxN] = {0};
+int maxLoad=1000;
+int currentload[32]={0};
 void input(){
     cin >> m >> n;
     for (int i = 1 ; i <= m; i++){
@@ -36,33 +35,40 @@ int check(int v, int k){
     }
     return 1;
 }
-
+void solution(){
+    int max =0;
+    /*for(int t = 1; t <= m; t++){
+        int temp=0;
+        for(int i = 1; i <= n; i++) if(X[i] == t) temp++;
+        if (temp > max) max= temp;
+    }*/
+    for(int i =1; i <=m; i++){
+        if(currentload[i]>max) max = currentload[i];
+    }
+    if (max < maxLoad) maxLoad = max;
+}
 void TRY(int k){
     for(int i = 0; i < teacher_list[k].size(); i++){
         int v = teacher_list[k][i];
         if(check(v,k)){
             X[k] = v;
+            currentload[v]++;
             if(k == n){
-
-                /*for(int j = 1; j <= n; j++) {
-                    currentLoad[X[j]]++;
-                }
-                // Cập nhật maxLoad
-                maxLoad = *max_element(currentLoad + 1, currentLoad + m + 1);*/
-                cnt++;
+                solution();
             }else{
                 TRY(k+1);
+                
             }
+            currentload[v]--;
         }
     }
 }
 void solve(){
-    cnt = 0;
     TRY(1);
+    cout << maxLoad;
 }
 int main(){
     input();
     solve();
-    cout << cnt;
     return 0;
 }

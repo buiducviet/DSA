@@ -1,5 +1,5 @@
 //C++
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 const int MAXN=100;
 int n, K, Q;
@@ -11,6 +11,8 @@ int load[MAXN];
 int y[MAXN];
 int f, f_min;
 int segments, nbR;
+int c_min;
+
 void input(){
     cin >> n >> K >> Q;
     for(int i = 1; i <=n; i++){
@@ -55,14 +57,14 @@ void TRY_X(int s, int k)
             f = f + c[s][v];
             load[k] = load[k] + d[v]; segments = segments + 1;
             if(v > 0 ) {
-                if (f + (n + nbR - segments) < f_min)
+                if (f + (n + nbR - segments)*c_min < f_min)
                     TRY_X(v,k);
             }
             else{
                 if (k == K)  {
-                    if (segments = n + nbR) updatebest();
+                    if (segments == n + nbR) updatebest();
                 }else{
-                    if (f + (n + nbR - segments) < f_min) TRY_X(y[k+1],k+1);
+                    if (f + (n + nbR - segments)*c_min < f_min) TRY_X(y[k+1],k+1);
                 }
             }
             visited[v] = false;
@@ -103,7 +105,16 @@ void solve(){
 }
 int main()
 {
+   
     input();
+     c_min = c[0][1];
+     for(int i = 0; i <=n ; i++){
+        for(int j=0; j<=n ; j++){
+           if(c[i][j] < c_min && c[i][j]!=0){
+            c_min = c[i][j];
+           }
+        }
+    }
     solve();
     return 0;
 }
