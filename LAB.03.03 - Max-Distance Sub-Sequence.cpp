@@ -17,9 +17,9 @@ bool check(int dis, int c, vector<int> x){
     }
     return false;
 }
-void binary_maxdistance(const vector<int> &x, int c){
+int binary_maxdistance(const vector<int> &x, int c){
         int left = 0;
-        int right = x.back() - x.front();
+        int right = (x.back() - x.front())/(c-1)+1;
         int result = -1;
 
         while (left <= right) {
@@ -33,12 +33,12 @@ void binary_maxdistance(const vector<int> &x, int c){
             }
         }
 
-        cout << result << endl;
+        return result;
 }
 int main(){
     ios::sync_with_stdio(false); cin.tie(0); cout.tie(0);
     cin >> T;
-    while(T>0){
+    while(T--){
         int n, c;
         vector<int> x;
         cin >> n >> c;
@@ -48,8 +48,8 @@ int main(){
             x.push_back(temp);
         }
         sort(x.begin(), x.end());
-        binary_maxdistance(x, c);
-        T--;
+        cout << binary_maxdistance(x, c) << endl;
+        
     }
     
     return 0;
