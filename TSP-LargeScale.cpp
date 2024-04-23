@@ -67,17 +67,6 @@ int main()
     }
     cout << n << endl;
 	findMinRoute(tsp);
-    int path[n];
-    for(int i = 0; i <n; i++){
-        cin >> path[i];
-    }
-    int s=0;
-    for(int i = 0; i <n-1; i++){
-        s+= tsp[path[i]][path[i+1]];
-    }
-    s+=tsp[path[n-1]][1];
-    cout << endl;
-    cout << "s: " << s;
 
 	return 0;
 }
